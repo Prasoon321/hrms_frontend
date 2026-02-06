@@ -10,6 +10,7 @@ A lightweight Human Resource Management System built as an assessment project. E
 ## Project Overview
 
 **HRMS Lite** is a minimal, production-ready HR management tool designed for small teams. It provides:
+
 - Employee registration and management
 - Attendance tracking with multiple status options (Present, Absent, Half Day, Leave)
 - Real-time dashboard showing total employees and attendance summary
@@ -24,6 +25,7 @@ A lightweight Human Resource Management System built as an assessment project. E
 ## Tech Stack
 
 ### Frontend
+
 - **Framework:** Next.js 16.1.6 (React 19, TypeScript)
 - **Styling:** Tailwind CSS 3.4.17 with PostCSS
 - **UI Components:** Radix UI (40+ headless components)
@@ -33,14 +35,16 @@ A lightweight Human Resource Management System built as an assessment project. E
 - **Theme Support:** next-themes for dark/light mode
 
 ### Backend
+
 - **Framework:** FastAPI 0.104.1
-- **Server:** Uvicorn 0.24.0  
+- **Server:** Uvicorn 0.24.0
 - **Async Driver:** Motor 3.3.2 (async MongoDB)
 - **Data Validation:** Pydantic 2.5.0
 - **Email Validation:** email-validator 2.1.0
 - **Environment Config:** python-dotenv 1.0.0
 
 ### Database
+
 - **MongoDB Atlas** (Cloud-hosted MongoDB)
 - Collections: `employees`, `attendance`
 - Indexes: Unique constraints on email and employee_id
@@ -50,18 +54,21 @@ A lightweight Human Resource Management System built as an assessment project. E
 ## Features
 
 ### ✅ Employee Management
+
 - **Create Employee:** Add new employees with name, email, and department
 - **List Employees:** View all employees with auto-generated IDs (EMP001, EMP002, etc.)
 - **View Details:** Get employee information by ID
 - **Delete Employee:** Remove employee and cascading attendance records
 
 ### ✅ Attendance Management
+
 - **Mark Attendance:** Record daily attendance status (Present, Absent, Half Day, Leave)
 - **View Records:** See all attendance entries sorted by date
 - **Employee History:** Check attendance history filtered by employee
 - **Update Status:** Modify existing attendance entries
 
 ### ✅ Dashboard
+
 - **Employee Count:** Display total employees in system
 - **Daily Summary:** Show count of employees present today
 - **Recent Employees:** Quick view of newly added employees
@@ -151,6 +158,7 @@ hrms-lite-ui/
 ## How To Run Project Locally
 
 ### Prerequisites
+
 - **Node.js** 18+ and **npm** (or pnpm)
 - **Python** 3.12+
 - **MongoDB Atlas** account with connection string
@@ -158,21 +166,25 @@ hrms-lite-ui/
 ### Frontend Setup
 
 1. Navigate to frontend root:
+
    ```bash
    cd hrms-lite-ui
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Update `.env.local` for local development:
+
    ```
    NEXT_PUBLIC_API_URL=http://localhost:8000
    ```
 
 4. Start development server:
+
    ```bash
    npm run dev
    ```
@@ -182,33 +194,38 @@ hrms-lite-ui/
 ### Backend Setup
 
 1. Navigate to backend folder:
+
    ```bash
    cd backend
    ```
 
 2. Create and activate Python virtual environment:
+
    ```bash
    # Windows:
    python -m venv venv
    .\venv\Scripts\Activate.ps1
-   
+
    # macOS/Linux:
    python3 -m venv venv
    source venv/bin/activate
    ```
 
 3. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. Create `.env` file in `backend/` folder:
+
    ```
    MONGODB_URL=mongodb+srv://YOUR_USER:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/?appName=Cluster0
    DATABASE_NAME=hrms_lite
    ```
 
 5. Start backend server:
+
    ```bash
    python -m uvicorn app.main:app --reload
    ```
@@ -221,18 +238,22 @@ hrms-lite-ui/
 ## Environment Variables
 
 ### Frontend (`.env.local`)
+
 ```
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
+
 - Determines which backend API the frontend calls
 - Use `http://localhost:8000` for local development
 - Use `https://hrms-fastapi.vercel.app` for production deployment
 
 ### Backend (`backend/.env`)
+
 ```
 MONGODB_URL=mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/?appName=Cluster0
 DATABASE_NAME=hrms_lite
 ```
+
 - `MONGODB_URL`: Full MongoDB Atlas connection string (keep secure, never commit)
 - `DATABASE_NAME`: Name of MongoDB database to use
 
@@ -241,25 +262,28 @@ DATABASE_NAME=hrms_lite
 ## API Endpoints
 
 ### Health Check
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | API health status |
-| GET | `/health` | Health check endpoint |
+
+| Method | Endpoint  | Description           |
+| ------ | --------- | --------------------- |
+| GET    | `/`       | API health status     |
+| GET    | `/health` | Health check endpoint |
 
 ### Employee Endpoints
-| Method | Endpoint | Description | Request Body |
-|--------|----------|-------------|---|
-| POST | `/employees` | Create new employee | `{full_name, email, department}` |
-| GET | `/employees` | List all employees | – |
-| GET | `/employees/{employee_id}` | Get employee by ID | – |
-| DELETE | `/employees/{employee_id}` | Delete employee | – |
+
+| Method | Endpoint                   | Description         | Request Body                     |
+| ------ | -------------------------- | ------------------- | -------------------------------- |
+| POST   | `/employees`               | Create new employee | `{full_name, email, department}` |
+| GET    | `/employees`               | List all employees  | –                                |
+| GET    | `/employees/{employee_id}` | Get employee by ID  | –                                |
+| DELETE | `/employees/{employee_id}` | Delete employee     | –                                |
 
 ### Attendance Endpoints
-| Method | Endpoint | Description | Request Body |
-|--------|----------|-------------|---|
-| POST | `/attendance` | Mark attendance | `{employee_id, date, status}` |
-| GET | `/attendance` | Get all attendance records | – |
-| GET | `/attendance/{employee_id}` | Get employee's attendance history | – |
+
+| Method | Endpoint                    | Description                       | Request Body                  |
+| ------ | --------------------------- | --------------------------------- | ----------------------------- |
+| POST   | `/attendance`               | Mark attendance                   | `{employee_id, date, status}` |
+| GET    | `/attendance`               | Get all attendance records        | –                             |
+| GET    | `/attendance/{employee_id}` | Get employee's attendance history | –                             |
 
 **Status Options:** `Present`, `Absent`, `Half Day`, `Leave`  
 **Date Format:** `YYYY-MM-DD`
@@ -275,6 +299,7 @@ DATABASE_NAME=hrms_lite
 Your frontend is already deployed at: https://hrms-frontend-five-lyart.vercel.app/
 
 **To redeploy after changes:**
+
 1. Push code to GitHub: `git push origin main`
 2. Vercel auto-deploys from main branch
 3. Set environment variable: `NEXT_PUBLIC_API_URL=https://hrms-fastapi.vercel.app`
@@ -284,11 +309,13 @@ Your frontend is already deployed at: https://hrms-frontend-five-lyart.vercel.ap
 Your backend is already deployed at: https://hrms-fastapi.vercel.app/
 
 **To redeploy after changes:**
+
 1. Navigate to backend: `cd backend`
 2. Push code to GitHub: `git push origin main`
 3. Vercel auto-deploys from main branch
 
 **Vercel Configuration** (`vercel.json`):
+
 ```json
 {
   "version": 2,
@@ -314,6 +341,7 @@ Your backend is already deployed at: https://hrms-fastapi.vercel.app/
 ### CORS Configuration
 
 Backend (`app/main.py`) allows requests from:
+
 - `http://localhost:3000` – Local development
 - `https://hrms-frontend-five-lyart.vercel.app` – Production frontend
 
@@ -322,6 +350,7 @@ Backend (`app/main.py`) allows requests from:
 ## Database Schema
 
 ### Employees Collection
+
 ```javascript
 {
   "_id": ObjectId,
@@ -336,6 +365,7 @@ Backend (`app/main.py`) allows requests from:
 **Indexes:** `employee_id` (unique), `email` (unique)
 
 ### Attendance Collection
+
 ```javascript
 {
   "_id": ObjectId,
@@ -353,6 +383,7 @@ Backend (`app/main.py`) allows requests from:
 ## Testing the Application
 
 ### Test Scenario 1: Add Employee
+
 1. Open https://hrms-frontend-five-lyart.vercel.app/
 2. Go to **Employees** page
 3. Fill form: Name, Email, Department
@@ -360,6 +391,7 @@ Backend (`app/main.py`) allows requests from:
 5. ✅ Employee appears in table
 
 ### Test Scenario 2: Mark Attendance
+
 1. Go to **Attendance** page
 2. Select employee from dropdown
 3. Choose today's date
@@ -368,6 +400,7 @@ Backend (`app/main.py`) allows requests from:
 6. ✅ Record appears in table
 
 ### Test Scenario 3: View Dashboard
+
 1. Go to **Dashboard** (home page)
 2. Check "Total Employees" count
 3. Check "Present Today" count
@@ -378,12 +411,14 @@ Backend (`app/main.py`) allows requests from:
 ## Validation Rules
 
 ### Employee Validation
+
 - ✅ Email must be valid format
 - ✅ Email must be unique
 - ✅ Full name required (1-100 chars)
 - ✅ Department required (1-50 chars)
 
 ### Attendance Validation
+
 - ✅ Employee must exist
 - ✅ Date format must be YYYY-MM-DD
 - ✅ Status must be: Present, Absent, Half Day, or Leave
@@ -396,6 +431,7 @@ Backend (`app/main.py`) allows requests from:
 All API responses follow standard format:
 
 **Success (200)**
+
 ```json
 {
   "employee_id": "EMP001",
@@ -407,6 +443,7 @@ All API responses follow standard format:
 ```
 
 **Error (4xx/5xx)**
+
 ```json
 {
   "detail": "Descriptive error message"
@@ -414,8 +451,9 @@ All API responses follow standard format:
 ```
 
 Common error codes:
+
 - `400` - Bad Request (validation error)
-- `404` - Not Found (resource doesn't exist)  
+- `404` - Not Found (resource doesn't exist)
 - `409` - Conflict (duplicate email)
 - `500` - Server Error
 
@@ -423,42 +461,52 @@ Common error codes:
 
 ## Assumptions
 
-✅ **Single Admin System**  
+✅ **Single Admin System**
+
 - No user authentication or role-based access control
 - Direct database access for admin operations
 
-✅ **No Employee Self-Service**  
+✅ **No Employee Self-Service**
+
 - Admin manually enters employee data
 - Employees cannot view their own records
 
-✅ **Minimal Features**  
+✅ **Minimal Features**
+
 - Employee and attendance management only
 - Designed for assessment scope, not production complexity
 
-✅ **MongoDB Atlas Cloud Hosting**  
+✅ **MongoDB Atlas Cloud Hosting**
+
 - Uses cloud-hosted MongoDB instead of local instance
 
 ---
 
 ## Limitations
 
-❌ **No Authentication / Authorization**  
+❌ **No Authentication / Authorization**
+
 - Any user accessing the frontend can perform admin actions
 - No user login or permission system
 
-❌ **No Payroll Module**  
+❌ **No Payroll Module**
+
 - Only attendance tracking, no salary calculations
 
-❌ **No Leave Management**  
+❌ **No Leave Management**
+
 - Attendance recorded manually, no leave approval workflow
 
-❌ **No Email Notifications**  
+❌ **No Email Notifications**
+
 - No automatic alerts or confirmations
 
-❌ **No Multi-Language Support**  
+❌ **No Multi-Language Support**
+
 - English only
 
-❌ **No Advanced Reporting**  
+❌ **No Advanced Reporting**
+
 - Basic attendance records only, no analytics or export
 
 ---
@@ -466,6 +514,7 @@ Common error codes:
 ## Commands Reference
 
 ### Frontend
+
 ```bash
 npm run dev          # Start development server (port 3000)
 npm run build        # Build for production
@@ -474,6 +523,7 @@ npm run lint         # Run ESLint
 ```
 
 ### Backend
+
 ```bash
 python -m uvicorn app.main:app --reload        # Dev with auto-reload
 python -m uvicorn app.main:app                 # Production mode
@@ -481,6 +531,7 @@ python -m uvicorn app.main:app --port 8001     # Custom port
 ```
 
 ### Git
+
 ```bash
 git add .
 git commit -m "Your message"
@@ -492,6 +543,7 @@ git push origin main
 ## Troubleshooting
 
 ### Backend won't start
+
 ```bash
 # Error: Port 8000 already in use
 # Solution: Use different port
@@ -506,6 +558,7 @@ source venv/bin/activate
 ```
 
 ### MongoDB connection fails
+
 ```bash
 # Error: Cannot connect to MongoDB
 # Solution: Verify connection string
@@ -515,6 +568,7 @@ source venv/bin/activate
 ```
 
 ### Frontend can't reach backend
+
 ```bash
 # Error: "Failed to fetch" or CORS error
 # Solutions:
@@ -525,6 +579,7 @@ source venv/bin/activate
 ```
 
 ### Deployment issues
+
 ```bash
 # Vercel deployment fails
 # 1. Push to GitHub first: git push origin main
@@ -582,6 +637,7 @@ source venv/bin/activate
 ## Assessment Notes
 
 This project demonstrates:
+
 - Full-stack web application development (frontend + backend)
 - RESTful API design principles
 - Real-time form validation and error handling
@@ -596,6 +652,7 @@ This project demonstrates:
 ## Support
 
 For issues or questions:
+
 1. Check API documentation at `{API_URL}/docs` (Swagger UI)
 2. Review browser Console (DevTools F12) for frontend errors
 3. Check backend terminal for server logs
@@ -610,6 +667,7 @@ For issues or questions:
 This project is built for educational purposes as part of a coding assessment.
 
 **Built with:**
+
 - [FastAPI](https://fastapi.tiangolo.com/)
 - [Next.js](https://nextjs.org/)
 - [MongoDB](https://www.mongodb.com/)
